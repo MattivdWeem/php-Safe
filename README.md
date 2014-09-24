@@ -4,8 +4,11 @@ php-Safe
 Send data safely trough PHP
 
 
-
+========
 ###Function List
 
-####randomString
+#####randomString
 Will generate a random string, you might give a lenght or a character set (array or string).
+
+#####hashString
+Will hash your string to a safe unreadable format(usable for password hashing).
