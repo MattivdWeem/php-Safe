@@ -9,6 +9,13 @@ I can not make you use this library. The library was made to make it easy to han
 
 Safety is important, i don't care how you do it, as long as you do it.
 
+###How to use PHP-Safe
+Setting up PHP safe is easy, just use it as every other class.
+
+```php
+    include_once('phpSafe.php');
+```
+
 
 Function list
 ========
