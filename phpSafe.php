@@ -1,5 +1,4 @@
 <?php
-
 /*
 *
 * PHP SAFE
@@ -8,10 +7,6 @@
 * @autor Matti van de Weem
 *
 */
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 class phpSafe{
 
     private $token = NULL; // the token is used for hashing, and crypting
