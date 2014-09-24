@@ -121,8 +121,61 @@ class phpSafe{
         return $count;
     }
 
+    /**
+     *
+     * Crpyt a string with a one ore multiple keys
+     *
+     * @param string $input the string to be crypted
+     * @param array/string $keys A single or an array of multiple keys
+     * @return string with the crypted value
+     */
+    public function sCrypt($input,$keys = false){
+        if(is_array($keys)):
+            $encryption_key = $this->convert_multi_key($keys);
+        else:
+            $encryption_key = $this->hash($keys,$keys);
+        endif;
 
+        $iv = substr($this->hash($encryption_key,$encryption_key),0,32);
+        $crypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($this->hash($encryption_key),0,8), $input, MCRYPT_MODE_CBC, $iv);
+        return base64_encode($crypt);
+    }
 
+     /**
+     *
+     * decrpyt a string with a one ore multiple keys
+     *
+     * @param string $input the string to be crypted
+     * @param array/string $keys A single or an array of multiple keys
+     * @return string with the decrypted value
+     */
+    function sDecrypt($input, $keys = false) {
+        if(is_array($keys)):
+            $encryption_key = $this->convert_multi_key($keys);
+        else:
+            $encryption_key = $this->hash($keys,$keys);
+        endif;
+
+        $iv = substr($this->hash($encryption_key,$encryption_key),0,32);
+        $output = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, substr($this->hash($encryption_key),0,8), base64_decode($input), MCRYPT_MODE_CBC, $iv);
+        return rtrim($output, "");
+
+    }
+
+     /**
+     *
+     * hash multiple keys to a single key
+     *
+     * @param array/string $keys A single or an array of multiple keys
+     * @return string with the crypted value
+     */
+    private function convert_multi_key($keys){
+        $str = '';
+        foreach($keys as $key):
+            $str = $this->hash($str,$key);
+        endforeach;
+        return $str;
+    }
 
 
 

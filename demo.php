@@ -30,4 +30,11 @@ p($secure->strenght($secure->randomString(35)));
 // same input, different settings
 
 
+// keys may be an array, or an string / int
+$keys = array('one','different','key');
+p( $test = $secure->sCrypt('My Secret Line Of code',$keys));
+p($secure->sDecrypt($test,$keys));
+
+
+
 ?>
