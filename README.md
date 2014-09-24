@@ -10,5 +10,8 @@ Send data safely trough PHP
 #####randomString
 Will generate a random string, you might give a lenght or a character set (array or string).
 
-#####hashString
-Will hash your string to a safe unreadable format(usable for password hashing).
+#####hash
+Will hash your string or array to a safe unreadable format(usable for password hashing).
+
+#####strenght
+Will check you given string or array against some simple strenght rules (ammount of chars/upper/lower/special, dubble and lenght)
