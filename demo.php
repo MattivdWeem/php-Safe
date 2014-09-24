@@ -4,6 +4,9 @@ ini_set('display_errors', '1');
 
 include_once('phpSafe.php');
 
+// Make the world a better place.
+function p($v){echo'<pre>';print_r($v);echo'</pre>';}
+
 // demo token = 4qXP4JidW5Y8s7zVZxTewXWdvwrbbot5FfK
 $keys = array('My Secret Hash','Your secret hash','Our secret Hash');
 // start a new phpSafe instance, with security token already set.
