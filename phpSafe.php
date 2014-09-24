@@ -4,6 +4,9 @@
 *
 * PHP SAFE
 *
+*
+* @autor Matti van de Weem
+*
 */
 
 error_reporting(E_ALL);
@@ -149,7 +152,7 @@ class phpSafe{
      * @param array/string $keys A single or an array of multiple keys
      * @return string with the decrypted value
      */
-    function sDecrypt($input, $keys = false) {
+    public function sDecrypt($input, $keys = false) {
         if(is_array($keys)):
             $encryption_key = $this->convert_multi_key($keys);
         else:
@@ -176,6 +179,38 @@ class phpSafe{
         endforeach;
         return $str;
     }
+
+     /**
+     *
+     * crypt all contents inside a file
+     *
+     * @param string, the file that will be locked
+     * @param bool $rClean, when rclean is enabled the original file will be removed by the obfusocator
+     * @return void
+     */
+    public function lockFile($file, $keys, $rClean = false){
+        $contents = file_get_contents($file);
+        if($rClean):unlink($file);endif;
+        $c = $this->sCrypt($contents,$keys);
+        file_put_contents($file.'.lock',$c);
+    }
+
+    /**
+     *
+     * deCrypt all contents inside a file
+     *
+     * @param string, the file that will be unlocked
+     * @param bool $rClean, when rclean is enabled the crypted file will be removed
+     * @return void
+     */
+    public function unlockFile($file, $keys,  $rClean = false){
+        $contents = file_get_contents($file);
+        if($rClean):unlink($file);endif;
+        $contents = $this->sDecrypt($contents,$keys);
+        file_put_contents(str_replace('.lock','',$file),$contents);
+    }
+
+
 
 
 
