@@ -48,8 +48,8 @@ class phpSafe{
             $random = rand(0,$arrayCount);
             if(isset($available[$random]) && $available[$random] != ''):
                 $return.= $available[$random];
+			++$i;
             endif;
-        ++$i;
         } while ($i < $lenght);
 
         return $return;
